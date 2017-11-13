@@ -1,2 +1,0 @@
-# rap-ad
-rap-ad
