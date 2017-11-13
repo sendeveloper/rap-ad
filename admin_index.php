@@ -16,7 +16,7 @@
   </head>
   <body>
     <header>
-      <!---------Navigation 1------- -->
+      <!---------Navigation 1-------  -->
       <nav class="white z-depth-3" role="navigation">
         <?php include('scripts/top_admin_fixed_sidenav.php'); ?>
       </nav>
