@@ -128,7 +128,7 @@
           <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
           <a href="#" class=" modal-action waves-effect waves-green btn-flat modal-delete">Yes</a>
       </div>
-  </div>
+    </div>
     <!--   <footer class="page-footer blue">
     <?php /*?><?php include("../scripts/footer.php"); ?><?php */?>
   </footer> -->
