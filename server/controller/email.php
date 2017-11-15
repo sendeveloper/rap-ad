@@ -5,11 +5,11 @@ class EMAIL{
 	private function format_email($info, $format)
 	{
 		include_once("variables.php");        
-		$link_url = SITEURL . "/users/registration/user_check_confirm_email.php";        
+		$link_url = SITEURL . "/admin_check_confirm_email.php";        
 		//grab the template content        
 		$template = file_get_contents('mail_template/signup_template.'.$format);                        
 		//replace all the tags        
-		$template = ereg_replace('{USERNAME}', $info['username'], $template);        
+		$template = ereg_replace('{USERNAME}', $info['adminname'], $template);        
 		$template = ereg_replace('{EMAIL}', $info['email'], $template);        
 		$template = ereg_replace('{KEY}', $info['key'], $template);        
 		$template = ereg_replace('{SITEPATH}',$link_url, $template);        
@@ -18,7 +18,7 @@ class EMAIL{
 	}				
 	private function format_forgot_email($info, $format)    {
 		include_once("variables.php");        
-		$link_url = SITEURL . "/users/registration/user_login.php";        
+		$link_url = SITEURL . "/admin_login.php";        
 		//grab the template content        
 		$template = file_get_contents('mail_template/forgot_password_template.'.$format);        
 		//replace all the tags        

@@ -1,3 +1,13 @@
+<?php 
+  include_once( "../../server/controller/admin.php" );
+  $admin = new ADMIN;
+  $admin_logged_in = FALSE;
+  if ( $admin->is_logged_in() ) 
+  { 
+    $admin_logged_in = TRUE;  
+    $admin->redirect();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
