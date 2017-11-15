@@ -1,3 +1,13 @@
+<?php 
+  include_once( "server/controller/admin.php" );
+  $admin = new ADMIN;
+  $admin_logged_in = FALSE;
+  if ( $admin->is_logged_in() ) 
+  { 
+    $admin_logged_in = TRUE;  
+    $admin->redirect();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>  
@@ -12,6 +22,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>  
     <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>  
+    <link href="../css/additional.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/form-materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   </head>
   <body>
@@ -52,12 +63,12 @@
                   <img class="responsive-img" src="../images/objects/lock-combo.svg" width="100" alt="lock icon"/>
                 </div>
                 <div class="col s9">	 
-                  <form>        
+                  <form id="forgot_pass_form" method="POST">        
                     <div class="input-field valign">          
                       <i class="material-icons prefix">email
                       </i>          
-                      <input id="email" type="email" class="validate">          
-                      <label for="email" data-error="wrong" data-success="right">Email
+                      <input id="forgot_email" name="forgot_email" type="email" class="validate">          
+                      <label for="forgot_email" data-error="wrong" data-success="right">Email
                       </label>        
                     </div>        
                     <div class="clearboth">
@@ -108,7 +119,11 @@
     <script src="../js/init.js">
     </script>  
     <script src="../js/interactive-rx.js">
-    </script>  
+    </script>
+    <script src="../../js/jquery.blockUI.js">
+    </script> 
+    <script src="../../js/admin_main.js">
+    </script>
     <!--Start of Tawk.to Script -->
     <?php include("../scripts/tawkto.php"); ?>
     <!--End of Tawk.to Script -->  

@@ -5,7 +5,6 @@
   if ( $admin->is_logged_in() ) 
   { 
     $admin_logged_in = TRUE;  
-    $admin->redirect();
   }
 ?>
 <!DOCTYPE html>

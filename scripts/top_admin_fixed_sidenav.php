@@ -42,7 +42,7 @@
       }        
       else          
         echo '<li>
-          <a href="#" class="waves-effect waves-red btn-flat">
+          <a href="admin_logout.php" class="waves-effect waves-red btn-flat">
             <span class="red-text text-lighten-2 font12">Logout
             </span>
           </a>
