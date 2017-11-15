@@ -116,6 +116,19 @@
         </div>
     </main>
 
+    <div id="deleteModal" class="modal">
+      <div class="modal-content">
+          <h4 style="color: red;">Do you really want to delete this drug?</h4>
+          <p>Drug color: <b id="dlg_drug_color"></b></p>
+          <p>Drug image: <br/>
+              <img id="dlg_drug_image" src="" style="height: 150px;"/>
+          </p>
+      </div>
+      <div class="modal-footer">
+          <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+          <a href="#" class=" modal-action waves-effect waves-green btn-flat modal-delete">Yes</a>
+      </div>
+  </div>
     <!--   <footer class="page-footer blue">
     <?php /*?><?php include("../scripts/footer.php"); ?><?php */?>
   </footer> -->
@@ -125,6 +138,7 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="../../../js/materialize.js"></script>
     <script src="../../../mobiscroll/js/mobiscroll.custom-3.0.0.min.js"></script>
+
     <script src="../../../js/init.js"></script>
     <script src="../../../js/interactive-rx.js"></script>
     <script src="../../../js/jquery.blockUI.js"></script> 
@@ -165,17 +179,16 @@
         {
           var obj = $('.drug_color_list tbody');
           var html = "";
-          console.log(data);
           for (var i=0;i<data.length;i++)
           {
-            var img = '<img src="" style="height: 40px;"/>';
+            var img = '<img src="' + data[i]['drug_color_image_file'] + '" style="height: 40px;"/>';
             html += '<tr attr-id="' + data[i]['drug_color_id'] + '"> \
                 <td>' + data[i]['drug_color'] + '</td> \
-                <td>' + data[i]['drug_color_image_file'] + '</td> \
+                <td>' + img + '</td> \
                 <td> \
                     <p> \
-                        <a class="waves-effect waves-grey btn-flat green-text"><i class="material-icons left">edit</i></a> \
-                        <a class="waves-effect waves-grey btn-flat red-text"><i class="material-icons left">delete</i></a> \
+                        <a class="waves-effect waves-grey btn-flat green-text edit"><i class="material-icons left">edit</i></a> \
+                        <a class="waves-effect waves-grey btn-flat red-text delete"><i class="material-icons left">delete</i></a> \
                     </p> \
                 </td> \
             </tr>';
