@@ -1,3 +1,13 @@
+<?php
+  include_once("../../server/controller/admin.php");
+  $admin = new ADMIN;
+  $admin_logged_in = FALSE;
+  if ($admin->is_logged_in()){
+    $admin_logged_in = TRUE;
+  }
+  else
+    $admin->redirect();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,6 +21,7 @@
     <link rel="stylesheet" href="../../../mobiscroll/css/mobiscroll.custom-3.0.0.min.css" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../../../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../../../css/additional.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../../../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../../../css/form-materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   </head>
@@ -60,9 +71,9 @@
               &nbsp;
             </div>
             <div class="col s12 m4"> 
-              <form>
+              <form id="drug_color_insert_form">
                 <div class="input-field">
-                  <input id="drug_color" type="text" class="validate">
+                  <input id="drug_color" name="drug_color" type="text" class="validate">
                   <label for="drug_color" data-error="wrong" data-success="right">Drug Color Name
                   </label>
                 </div>
@@ -70,7 +81,7 @@
                   <div class="btn">
                     <span>Upload image
                     </span>
-                    <input type="file">
+                    <input type="file" id="upload_image" name="upload_image">
                   </div>
                   <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Upload Image">
@@ -133,6 +144,10 @@
     <script src="../../../js/init.js">
     </script>
     <script src="../../../js/interactive-rx.js">
+    </script>
+    <script src="../../../js/jquery.blockUI.js">
+    </script> 
+    <script src="../../../js/admin_main.js">
     </script>
     <!--Start of Tawk.to Script -->
     <?php include("../../../scripts/tawkto.php"); ?>
