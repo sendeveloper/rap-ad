@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../css/additional.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/form-materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   </head>
   <body>
@@ -52,19 +53,19 @@
                   <img class="responsive-img" src="../../images/objects/login-key.svg" alt="login icon"/>
                 </div>
                 <div class="col s9">
-                  <form>
+                  <form id="login_form" method="post">
                     <div class="input-field valign">
                       <i class="material-icons prefix">account_circle
                       </i>
-                      <input id="username" type="text" class="validate">
-                      <label for="username" data-error="wrong" data-success="right">Username
+                      <input id="login_email" name="login_email" type="email" class="validate">
+                      <label for="login_email" data-error="wrong" data-success="right">Email
                       </label>
                     </div>
                     <div class="input-field valign">
                       <i class="material-icons prefix">person
                       </i>
-                      <input id="password" type="password" class="validate">
-                      <label for="password" data-error="wrong" data-success="right">Password
+                      <input id="login_password" name="login_password" type="password" class="validate">
+                      <label for="login_password" data-error="wrong" data-success="right">Password
                       </label>
                     </div>
                     <div class="clearboth">
@@ -77,6 +78,7 @@
                       </button>
                       <br>
                       <br>
+                      <a href="admin_register.php" class="waves-effect waves-light btn-flat lime-text text-accent-3">Register</a>
                       <a href="admin_forgot_password.php" class="waves-effect waves-light btn-flat grey-text text-lighten-1">Forgot Password
                       </a>
                     </div>
@@ -116,6 +118,10 @@
     <script src="../js/init.js">
     </script>
     <script src="../js/interactive-rx.js">
+    </script>
+    <script src="../../js/jquery.blockUI.js">
+    </script> 
+    <script src="../../js/admin_main.js">
     </script>
     <!--Start of Tawk.to Script -->
     <?php include("../scripts/tawkto.php"); ?>

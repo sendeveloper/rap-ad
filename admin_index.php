@@ -1,5 +1,5 @@
 <?php 
-  include_once( "../../server/controller/admin.php" );
+  include_once( "server/controller/admin.php" );
   $admin = new ADMIN;
   $admin_logged_in = FALSE;
   if ( $admin->is_logged_in() ) 
