@@ -116,9 +116,9 @@
         </div>
     </main>
 
-    <div id="deleteModal" class="modal">
+    <div id="deleteColorModal" class="modal">
       <div class="modal-content">
-          <h4 style="color: red;">Do you really want to delete this drug?</h4>
+          <h4 style="color: red;">Do you really want to delete this drug color?</h4>
           <p>Drug color: <b id="dlg_drug_color"></b></p>
           <p>Drug image: <br/>
               <img id="dlg_drug_image" src="" style="height: 150px;"/>

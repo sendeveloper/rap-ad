@@ -4,6 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 include_once(dirname(__FILE__) . "/controller/admin.php");
 include_once(dirname(__FILE__) . "/controller/drugcolor.php");
+include_once(dirname(__FILE__) . "/controller/drugshape.php");
 
 include_once(dirname(__FILE__) . "/controller/email.php");
 if (isset($_POST)) {
@@ -67,6 +68,7 @@ if (isset($_POST)) {
             }
             echo json_encode($ret);
             break;
+        // Drug Color
         case 'drug_color_insert':
             $drug_color = new Drugcolor();
             $ret = $drug_color->insert_drug_color($_POST);
@@ -109,6 +111,52 @@ if (isset($_POST)) {
             $ret = $drug_color->update_drug_color($_POST);
             if ($ret['code'] == 200)
                 $ret['url'] = "drug_color_list.php";
+            echo json_encode($ret);
+            break;
+
+        // Drug Shape
+        case 'drug_shape_insert':
+            $drug_shape = new Drugshape();
+            $ret = $drug_shape->insert_drug_shape($_POST);
+            if ($ret['code'] == 200)
+                $ret['url'] = "drug_shape_list.php";
+            echo json_encode($ret);
+            break;
+        case 'drug_shape_list':
+            $drug_shape = new Drugshape();
+            $data = $drug_shape->get_drug_list();
+            $ret = array('code' => 200, 'data' => $data);
+            echo json_encode($ret);
+            break;
+        case 'drug_shape_one':
+            $drug_shape = new Drugshape();
+            if (isset($_POST['id']) && (int)$_POST['id'] > 0)
+                $data = $drug_shape->get_drug_one($_POST['id']);
+            else
+                $data = array();
+            if (count($data) > 0)
+                $ret = array('code' => 200, 'data' => $data);
+            else
+                $ret = array('code' => 400, 'status' => "Error", 'msg' => "Sorry, you can not get the required data from the database");
+            echo json_encode($ret);
+            break;
+        case 'drug_shape_delete':
+            $drug_shape = new Drugshape();
+            if (isset($_POST['id']) && (int)$_POST['id'] > 0)
+                $data = $drug_shape->get_drug_delete($_POST['id']);
+            else
+                $data = -1;
+            if ($data > 0)
+                $ret = array('code' => 200);
+            else
+                $ret = array('code' => 400, 'status' => "Error", 'msg' => "Sorry, you can not delete the required data");
+            echo json_encode($ret);
+            break;
+        case 'drug_shape_update':
+            $drug_shape = new Drugshape();
+            $ret = $drug_shape->update_drug_shape($_POST);
+            if ($ret['code'] == 200)
+                $ret['url'] = "drug_shape_list.php";
             echo json_encode($ret);
             break;
         default:
