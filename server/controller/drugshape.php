@@ -72,7 +72,7 @@ class Drugshape
     public function update_drug_shape($form_data)
     {
         $response = array(); $response['code'] = 200;
-        if(!isset($_FILES['file']) || !file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['myfile']['tmp_name']))
+        if(!isset($_FILES['file']) || !file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name']))
         {
             $data = array();
             $data['drug_shape_id']                = $form_data['drug_id'];

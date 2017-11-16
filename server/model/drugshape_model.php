@@ -29,7 +29,7 @@ class DrugshapeModel{
   }
   public function get_drug_list() {
     global $mysqli;
-    $sql = "SELECT * FROM {$this->table_name}";
+    $sql = "SELECT * FROM {$this->table_name} ORDER BY drug_shape_id DESC";
     $ret = array();
     if ($result = $mysqli->query($sql)) {
       if ($result->num_rows>0)

@@ -85,7 +85,7 @@
                           $id = isset($_GET['q']) ? $_GET['q'] : -1;
                           $id = (int)$id;
                         ?>
-                        <form id="drug_color_update_form">
+                        <form id="drug_color_update_form" method="POST">
                             <input type="hidden" id="drug_id" value="<?php echo $id ?>" />
                             <div class="input-field">
                                 <input id="update_drug_color" name="update_drug_color" type="text" class="validate">
