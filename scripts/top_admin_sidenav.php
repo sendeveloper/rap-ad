@@ -26,7 +26,7 @@
         <?php        
         }        
         else
-          echo '<li><a href="admin_logout.php" class="waves-effect waves-red btn-flat"><span class="red-text text-lighten-2 font12">Logout</span></a></li>';
+          echo '<li><a href="/admin/admin_logout.php" class="waves-effect waves-red btn-flat"><span class="red-text text-lighten-2 font12">Logout</span></a></li>';
         ?>
         
         <li><a href="#redapple-map"><i class="material-icons grey-text text-lighten-2">place</i></a>

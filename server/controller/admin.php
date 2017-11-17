@@ -31,7 +31,7 @@ class ADMIN
     {
         session_destroy();
         if (file_exists("admin_login.php"))
-            header("Location: admin_login.php");
+            header("Location: /admin/admin_login.php");
     }
     public function get_admin()
     {
@@ -53,9 +53,9 @@ class ADMIN
     public function redirect()
     {
         if (isset($_SESSION['admin1234'])) {
-            header("Location: index.php");
+            header("Location: /admin/index.php");
         } else
-            header("Location: admin_login.php");
+            header("Location: /admin/admin_login.php");
     }
     public function confirm_email($email, $key)
     {

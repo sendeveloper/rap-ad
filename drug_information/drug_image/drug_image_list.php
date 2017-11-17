@@ -226,13 +226,18 @@
           $('#ndc-input').autocomplete({
             data: ndc_auto_data,
             onAutocomplete: function(txt) {
+                $('.autocomplete-content').html("");
                 load_list_data(txt);
             },
             limit: 20
           })
         }
         $('#ndc-input').keyup(function(e) {
-            load_list_data($(this).val());
+            var code = e.which;
+            if(code==13)e.preventDefault();
+            if(code==32||code==13||code==188||code==186){
+                load_list_data($(this).val());
+            }
         })
         function load_list_data(filter) {
           var data = {'flag': 'drug_image_list', 'filter': filter};

@@ -247,6 +247,70 @@ if (isset($_POST)) {
                 $ret['url'] = "drug_image_list.php";
             echo json_encode($ret);
             break;
+
+        // Drug Property
+        case 'drug_property_insert':
+            unset($_POST['flag']);
+            $drug_property = new Drugproperty();
+            $ret = $drug_property->insert_drug_property($_POST);
+            if ($ret['code'] == 200)
+                $ret['url'] = "drug_properties_list.php";
+            echo json_encode($ret);
+            break;
+        case 'drug_property_list_auto':
+            $drug_property = new Drugproperty();
+            $ndc_data = $drug_property->get_drug_simple_list();
+            $page_count = (int)((count($ndc_data)-1) / 10) + 1;
+            
+            $ret = array('code' => 200, 'ndc_data' => $ndc_data, 'page_count' => $page_count);
+            echo json_encode($ret);
+            break;
+        case 'drug_property_list':
+            $drug_property = new Drugproperty();
+            $data = $drug_property->get_drug_list($_POST['page'], $_POST['filter']);
+            if ($_POST['filter'] != '')
+            {
+                $count = (int)$data['count'];
+                $page_count = (int)(($count-1) / 10) + 1;
+                unset($data['count']);
+                $ret = array('code' => 200, 'data' => $data, 'page_count' => $page_count);
+            }
+            else
+                $ret = array('code' => 200, 'data' => $data);
+            echo json_encode($ret);
+            break;
+        case 'drug_property_one':
+            $drug_property = new Drugproperty();
+            if (isset($_POST['id']))
+                $data = $drug_property->get_drug_one($_POST['id']);
+            else
+                $data = array();
+            if (count($data) > 0)
+                $ret = array('code' => 200, 'data' => $data);
+            else
+                $ret = array('code' => 400, 'status' => "Error", 'msg' => "Sorry, you can not get the required data from the database");
+            echo json_encode($ret);
+            break;
+        case 'drug_property_delete':
+            $drug_property = new Drugproperty();
+            if (isset($_POST['id']))
+                $data = $drug_property->get_drug_delete($_POST['id']);
+            else
+                $data = -1;
+            if ($data > 0)
+                $ret = array('code' => 200);
+            else
+                $ret = array('code' => 400, 'status' => "Error", 'msg' => "Sorry, you can not delete the required data");
+            echo json_encode($ret);
+            break;
+        case 'drug_property_update':
+            $drug_property = new Drugproperty();
+            unset($_POST['flag']);
+            $ret = $drug_property->update_drug_property($_POST);
+            if ($ret['code'] == 200)
+                $ret['url'] = "drug_properties_list.php";
+            echo json_encode($ret);
+            break;
         default:
             # code...            break;    
     }
