@@ -132,7 +132,7 @@
                       </button>
                       <br> 
                       <br> 
-                      <a href="user_login.php" class="waves-effect waves-light btn-flat amber-text text-accent-3">Registered already
+                      <a href="admin_login.php" class="waves-effect waves-light btn-flat amber-text text-accent-3">Registered already
                       </a> 
                     </p>              
                   </div>            

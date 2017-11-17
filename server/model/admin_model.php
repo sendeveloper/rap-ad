@@ -66,7 +66,7 @@ class AdminModel{
   	   			}
   	   			else
   	   				$return_code['msg'] = 'Wrong password or email';
-  	   			$mysqli->close();
+  	   			
   	   		}
   	   	}catch(Exception $e)
   		{
@@ -90,7 +90,7 @@ class AdminModel{
    			'{$data['confirm_email']}', '{$data['password']}', '{$token}', 'No', '{$data['user_level']}')";
   		$mysqli->query($sql);
   		$ret_id = $mysqli->insert_id;
-  		$mysqli->close();
+  		
   		if ($ret_id != -1)
   			return $token;
   		else
@@ -108,7 +108,7 @@ class AdminModel{
   		$return_code['result'] = 'success';
   		$return_code['msg'] = 'You have successfully updated the password';
   		
-  		$mysqli->close();
+  		
   		return $return_code;
   	}
    	public function confirm_email($email, $key)
@@ -131,7 +131,7 @@ class AdminModel{
 	   				else
 	   					$return_code['msg'] = "You have already verified your email";
 	   			}
-				$mysqli->close();
+				
 			}
         }
         catch(Exception $e)

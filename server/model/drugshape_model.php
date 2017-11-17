@@ -24,7 +24,7 @@ class DrugshapeModel{
     $sql .= " VALUES ('{$data['drug_shape']}', '{$data['drug_shape_image_file']}')";
     $mysqli->query($sql);
     $ret_id = $mysqli->insert_id;
-    $mysqli->close();
+    
     return $ret_id;
   }
   public function get_drug_list() {
@@ -40,7 +40,7 @@ class DrugshapeModel{
         }
       }
     }
-    $mysqli->close();
+    
     return $ret;
   }
   public function get_drug_one($id) {
@@ -54,7 +54,7 @@ class DrugshapeModel{
         $ret = $row;
       }
     }
-    $mysqli->close();
+    
     return $ret;
   }
   public function get_drug_delete($id) {
@@ -62,7 +62,7 @@ class DrugshapeModel{
     $sql = "DELETE FROM {$this->table_name} WHERE drug_shape_id={$id}";
     $ret = array();
     $count = $mysqli->query($sql);
-    $mysqli->close();
+    
     if (!$count)
       return -1;
     return $count;
@@ -81,7 +81,7 @@ class DrugshapeModel{
     $sql .= " WHERE drug_shape_id = '{$data['drug_shape_id']}'";
     $result = $mysqli->query($sql);
     $ret_id = $result ? 1 : -1;
-    $mysqli->close();
+    
     return $ret_id;
   }
 }

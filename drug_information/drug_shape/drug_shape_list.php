@@ -109,24 +109,13 @@
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
-
-
-
                     <div class="col s12 m2">
                         &nbsp;
                     </div>
-
-
                 </div>
             </div>
         </div>
-
-
-
-
-
         <div class="section grey lighten-4">
             <div class="container">
                 <div class="row">
@@ -144,9 +133,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </main>
     <div id="deleteShapeModal" class="modal">
       <div class="modal-content">
@@ -164,8 +150,6 @@
     <!--  <footer class="page-footer blue">
     <?php /*?><?php include("../scripts/footer.php"); ?><?php */?>
   </footer> -->
-
-
     <!--  Scripts -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="../../../js/materialize.js"></script>
