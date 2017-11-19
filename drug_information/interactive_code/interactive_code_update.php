@@ -109,7 +109,7 @@
 
                                     <div class="input-field">
                                         <!------Use autocomplete from ndc field in drug_properties table------>
-                                        <input type="text" id="update_ndc1" name="update_ndc1" class="validate">
+                                        <input type="text" id="update_ndc1" name="update_ndc1" class="validate" autocomplete="off">
                                         <label for="update_ndc1">Drug NDC Number</label>
                                     </div>
                                 </div>
