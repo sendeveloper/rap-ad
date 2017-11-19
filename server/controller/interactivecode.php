@@ -53,6 +53,8 @@ class Interactivecode
         $data = $form_data;
         $data['interactive_code_id'] = $data['id'];
         unset($data['id']);
+        $data['interactive_code'] = $this->generate_code();
+
         $interactivecode_model = new InteractivecodeModel();
         $ret_id = $interactivecode_model->update_interactive_code($data);
         if ($ret_id != -1)

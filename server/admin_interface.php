@@ -354,19 +354,16 @@ if (isset($_POST)) {
             echo json_encode($ret);
             break;
         case 'interactive_code_update_one':
-            $interactive_code = new Interactivecode();
-            $ndc_data = array();
-            $color_data = array();
-            $shape_data = array();
+            $ndcdata = array();
+            $data = array();
             if (isset($_POST['id']) && (int)$_POST['id'] > 0){
-                $data = $interactive_code->get_code_one($_POST['id']);
                 $drug_property = new Drugproperty();
-                $ndc_data = $drug_property->get_drug_simple_list();
+                $ndcdata = $drug_property->get_drug_simple_list();
+                $interactive_code = new Interactivecode();
+                $data = $interactive_code->get_code_one($_POST['id']);
             }
-            else
-                $data = array();
             if (count($data) > 0)
-                $ret = array('code' => 200, 'data' => $data, 'ndc_data' => $ndc_data);
+                $ret = array('code' => 200, 'ndc_data' => $ndcdata, 'data' => $data);
             else
                 $ret = array('code' => 400, 'status' => "Error", 'msg' => "Sorry, you can not get the required data from the database");
             echo json_encode($ret);

@@ -30,9 +30,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
 
-    <!-- Include Editor style. -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <header>
@@ -88,10 +85,14 @@
                     <div class="col s12 m6 card-panel">
                         <p class="red-text">Update Ready Status Only. Other fields are read only.</p>
                         <hr class="hrblue">
-                        <form>
-
+                        <form id="interactive_code_update_form" method="POST">
+                            <?php
+                                $id = isset($_GET['q']) ? $_GET['q'] : -1;
+                                $id = (int)$id;
+                            ?>
+                            <input type="hidden" id="code_id" name="code_id" value="<?php echo $id ?>" />
                             <div class="input-field">
-                                <input id="update_patient_first_name" type="text" class="validate">
+                                <input id="update_patient_first_name" name="update_patient_first_name" type="text" class="validate">
                                 <label for="update_patient_first_name" data-error="wrong" data-success="right">Patient First Name</label>
                             </div>
                             <br>
@@ -100,7 +101,7 @@
                                 <div class="col s12 m5">
 
                                     <div class="input-field">
-                                        <input id="update_date_of_birth" type="text" class="datepicker">
+                                        <input id="update_date_of_birth" name="update_date_of_birth" type="text" class="datepicker">
                                         <label for="update_date_of_birth" data-error="wrong" data-success="right">Date Of Birth</label>
                                     </div>
                                     <br>
@@ -108,8 +109,8 @@
 
                                     <div class="input-field">
                                         <!------Use autocomplete from ndc field in drug_properties table------>
-                                        <input type="text" id="autocomplete-input" class="autocomplete">
-                                        <label for="autocomplete-input">Drug NDC Number</label>
+                                        <input type="text" id="update_ndc1" name="update_ndc1" class="validate">
+                                        <label for="update_ndc1">Drug NDC Number</label>
                                     </div>
                                 </div>
                                 <div class="col s12 m1">
@@ -127,7 +128,7 @@
                                     <div class="switch">
                                         <label><span class="font24 orange-text">Prescription Ready? </span>
                                             <br> NO
-                                            <input type="checkbox">
+                                            <input type="checkbox" name="update_ready" id="update_ready">
                                             <span class="lever"></span> YES
                                         </label>
                                     </div>
@@ -137,7 +138,7 @@
                             <p>&nbsp;</p>
                             <p>&nbsp;</p>
                             <p class="center-align">
-                                <button class="btn waves-effect waves-light red" type="submit" name="action">Insert
+                                <button class="btn waves-effect waves-light red" type="submit" name="action">Update
                                     <i class="material-icons right">send</i>
                                 </button>
                             </p>
@@ -192,25 +193,17 @@
     <script src="../../../js/init.js"></script>
     <script src="../../../js/interactive-rx.js"></script>
 
-    <!--FROALA EDITOR-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
-
-    <!-- Include Editor JS files. -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.1/js/froala_editor.pkgd.min.js">
-    </script>
-
     <!-- Initialize the editor. -->
     <script src="../../../js/jquery.blockUI.js"></script>
     <script src="../../../js/admin_main.js"></script>
     <script>
       $(document).ready(function() {
+        var ndc_auto_data = {};
         var server_url = "../../server/admin_interface.php";
         load_data();
         function load_data() {
-          var id = $('#drug_id').val();
-          var data = {'flag': 'interactive_code_one', 'id': id};
+          var id = $('#code_id').val();
+          var data = {'flag': 'interactive_code_update_one', 'id': id};
           $.ajax({
             type : 'POST',
             dataType: 'json',
@@ -231,10 +224,16 @@
                 }
                 else
                 {
-                  console.log(res['data']);
+                   for (var i=0; i<res['ndc_data'].length; i++) {
+                      ndc_auto_data[ res['ndc_data'][i]['ndc'] ] = null;
+                  }
+                  if (res['data']['prescription_ready'].toLowerCase() == 'yes')
+                    $('#update_ready').prop('checked', 'checked');
                   $.each(res['data'], function(key, value) {
-                    $('#' + key).val(value);  
+                    $('#update_' + key).val(value).focus();
                   })
+                  $('#update_patient_first_name').focus();
+                  autoNdcInit();
                 }
               }
               else
@@ -248,6 +247,15 @@
               console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
               $.unblockUI();
             }
+          })
+        }
+        function autoNdcInit(){
+          $('#update_ndc1').autocomplete({
+            data: ndc_auto_data,
+            onAutocomplete: function(txt) {
+              
+            },
+            limit: 20
           })
         }
       });
