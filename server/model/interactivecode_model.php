@@ -7,13 +7,13 @@ if (file_exists(dirname(__FILE__)."/config.php"))
 else if (file_exists(dirname(__FILE__)."/../config.php"))
 	require_once(dirname(__FILE__)."/../config.php");
 
-class DrugeducationModel{
+class InteractivecodeModel{
 	private $table_name;
 	public function __construct()
   {
-  	$this->table_name = "patient_drug_information";
+  	$this->table_name = "patient_interactivity_code";
   }
-  public function insert_drug_education($data) {
+  public function insert_interactive_code($data) {
     global $mysqli;
     $ret_id = -1;
     $sql1 = "(";
@@ -32,16 +32,16 @@ class DrugeducationModel{
     
     return $ret_id;
   }
-  public function get_drug_simple_list() {
+  public function get_code_simple_list() {
     global $mysqli;
-    $sql = "SELECT ndc, generic_name FROM {$this->table_name} ORDER BY ndc";
+    $sql = "SELECT interactive_code FROM {$this->table_name} ORDER BY interactive_code";
     $ret = array();
     if ($result = $mysqli->query($sql)) {
       if ($result->num_rows>0)
       {
         while($row = $result->fetch_assoc())
         {
-          $temp = array('ndc' => $row['ndc'], 'generic_name' => $row['generic_name']);
+          $temp = array('code' => $row['interactive_code']);
           $ret[] = $temp;
         }
       }
@@ -49,14 +49,14 @@ class DrugeducationModel{
     
     return $ret;
   }
-  public function get_drug_list($filter) {
+  public function get_code_list($filter) {
     global $mysqli;
     $ret = array();
     $sql = "SELECT * FROM {$this->table_name}";
     if ($filter != ""){
-      $sql .= " WHERE `ndc` LIKE '%{$filter}%'";
+      $sql .= " WHERE `interactive_code` LIKE '%{$filter}%'";
     }
-    $sql .= " ORDER BY ndc DESC";
+    $sql .= " ORDER BY interactive_code DESC";
     if ($result = $mysqli->query($sql)) {
       if ($result->num_rows>0)
       {
@@ -69,9 +69,9 @@ class DrugeducationModel{
     // 
     return $ret;
   }
-  public function get_drug_one($id) {
+  public function get_code_one($id) {
     global $mysqli;
-    $sql = "SELECT * FROM {$this->table_name} WHERE patient_drug_information_id='{$id}'";
+    $sql = "SELECT * FROM {$this->table_name} WHERE interactive_code_id='{$id}'";
     $ret = array();
     if ($result = $mysqli->query($sql)) {
       if ($result->num_rows>0)
@@ -83,9 +83,9 @@ class DrugeducationModel{
     
     return $ret;
   }
-  public function get_drug_delete($id) {
+  public function get_code_delete($id) {
     global $mysqli;
-    $sql = "DELETE FROM {$this->table_name} WHERE patient_drug_information_id='{$id}'";
+    $sql = "DELETE FROM {$this->table_name} WHERE interactive_code_id='{$id}'";
     $ret = array();
     $count = $mysqli->query($sql);
     
@@ -93,7 +93,7 @@ class DrugeducationModel{
       return -1;
     return $count;
   }
-  public function update_drug_education($data) {
+  public function update_interactive_code($data) {
     global $mysqli;
     $ret_id = -1;
     $sql = "UPDATE {$this->table_name} SET ";
@@ -103,7 +103,7 @@ class DrugeducationModel{
       $sql .= " {$key} = '$each', ";
     }
     $sql = substr($sql, 0, strlen($sql) - 2);
-    $sql .= " WHERE patient_drug_information_id = '{$data['patient_drug_information_id']}'";
+    $sql .= " WHERE interactive_code_id = '{$data['interactive_code_id']}'";
     $result = $mysqli->query($sql);
     $ret_id = $result ? 1 : -1;
     

@@ -89,8 +89,8 @@
                         <hr class="style11">
                         <form id="drug_education_insert_form" method="POST">
                             <div class="input-field">
-                                <input type="text" id="ndc" name="ndc" class="validate">
-                                <label for="ndc">NDC</label>
+                                <input type="text" id="ndc-input" name="ndc-input" class="validate" autocomplete="off">
+                                <label for="ndc-input">NDC</label>
                             </div>
 
                             <div class="input-field">

@@ -29,9 +29,9 @@ class Drugeducation
         $ret = $drugeducation_model->get_drug_simple_list();
         return $ret;
     }
-    public function get_drug_list($page, $filter) {
+    public function get_drug_list($filter) {
         $drugeducation_model = new DrugeducationModel();
-        $ret = $drugeducation_model->get_drug_list($page, $filter);
+        $ret = $drugeducation_model->get_drug_list($filter);
         return $ret;
     }
     public function get_drug_one($id) {
@@ -48,7 +48,8 @@ class Drugeducation
     {
         $response = array(); $response['code'] = 200;
         $data = $form_data;
-
+        $data['patient_drug_information_id'] = $data['id'];
+        unset($data['id']);
         $drugeducation_model = new DrugeducationModel();
         $ret_id = $drugeducation_model->update_drug_education($data);
         if ($ret_id != -1)
