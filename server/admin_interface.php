@@ -7,6 +7,7 @@ include_once(dirname(__FILE__) . "/controller/drugcolor.php");
 include_once(dirname(__FILE__) . "/controller/drugshape.php");
 include_once(dirname(__FILE__) . "/controller/drugimage.php");
 include_once(dirname(__FILE__) . "/controller/drugproperty.php");
+include_once(dirname(__FILE__) . "/controller/drugeducation.php");
 
 include_once(dirname(__FILE__) . "/controller/email.php");
 if (isset($_POST)) {
@@ -309,6 +310,87 @@ if (isset($_POST)) {
             $ret = $drug_property->update_drug_property($_POST);
             if ($ret['code'] == 200)
                 $ret['url'] = "drug_properties_list.php";
+            echo json_encode($ret);
+            break;
+
+        // Drug Image
+        case 'drug_education_insert_auto':
+            $drug_property = new Drugproperty();
+            $ndc_data = $drug_property->get_drug_simple_list();
+            $ret = array('code' => 200, 'ndc_data' => $ndc_data);
+            echo json_encode($ret);
+            break;
+        case 'drug_education_insert':
+            $drug_education = new Drugeducation();
+            $ret = $drug_education->insert_drug_education($_POST);
+            if ($ret['code'] == 200)
+                $ret['url'] = "drug_education_list.php";
+            echo json_encode($ret);
+            break;
+        case 'drug_education_list_auto':
+            $drug_education = new Drugeducation();
+            $ndc_data = $drug_education->get_drug_simple_list();
+            $ret = array('code' => 200, 'ndc_data' => $ndc_data);
+            echo json_encode($ret);
+            break;
+        case 'drug_education_list':
+            $drug_education = new Drugeducation();
+            $data = $drug_education->get_drug_list($_POST['filter']);
+            $ret = array('code' => 200, 'data' => $data);
+            echo json_encode($ret);
+            break;
+        case 'drug_education_one':
+            $drug_education = new Drugeducation();
+            if (isset($_POST['id']) && (int)$_POST['id'] > 0)
+                $data = $drug_education->get_drug_one($_POST['id']);
+            else
+                $data = array();
+            if (count($data) > 0)
+                $ret = array('code' => 200, 'data' => $data);
+            else
+                $ret = array('code' => 400, 'status' => "Error", 'msg' => "Sorry, you can not get the required data from the database");
+            echo json_encode($ret);
+            break;
+        case 'drug_education_update_one':
+            $drug_education = new Drugeducation();
+            $ndc_data = array();
+            $color_data = array();
+            $shape_data = array();
+            if (isset($_POST['id']) && (int)$_POST['id'] > 0){
+                $data = $drug_education->get_drug_one($_POST['id']);
+                $drug_property = new Drugproperty();
+                $ndc_data = $drug_property->get_drug_simple_list();
+                $drug_color = new Drugcolor();
+                $color_data = $drug_color->get_drug_list();
+                $drug_shape = new Drugshape();
+                $shape_data = $drug_shape->get_drug_list();
+            }
+            else
+                $data = array();
+            if (count($data) > 0)
+                $ret = array('code' => 200, 'data' => $data, 'ndc_data' => $ndc_data, 
+                        'color_data' => $color_data, 'shape_data' => $shape_data);
+            else
+                $ret = array('code' => 400, 'status' => "Error", 'msg' => "Sorry, you can not get the required data from the database");
+            echo json_encode($ret);
+            break;
+        case 'drug_education_delete':
+            $drug_education = new Drugeducation();
+            if (isset($_POST['id']) && (int)$_POST['id'] > 0)
+                $data = $drug_education->get_drug_delete($_POST['id']);
+            else
+                $data = -1;
+            if ($data > 0)
+                $ret = array('code' => 200);
+            else
+                $ret = array('code' => 400, 'status' => "Error", 'msg' => "Sorry, you can not delete the required data");
+            echo json_encode($ret);
+            break;
+        case 'drug_education_update':
+            $drug_education = new Drugeducation();
+            $ret = $drug_education->update_drug_education($_POST);
+            if ($ret['code'] == 200)
+                $ret['url'] = "drug_education_list.php";
             echo json_encode($ret);
             break;
         default:

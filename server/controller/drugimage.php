@@ -143,54 +143,6 @@ class Drugimage
                 $response = array('status' => 'DB Error', 'code' => 400);
         }
         return $response;
-
-        // $response = array(); $response['code'] = 200;
-        // if(!isset($_FILES['file']) || !file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name']))
-        // {
-        //     $data = array();
-        //     $data['drug_image_id']                = $form_data['drug_id'];
-        //     $data['drug_image']             = $form_data['drug_image'];
-
-        //     $drugimage_model = new DrugimageModel();
-        //     $ret_id = $drugimage_model->update_drug_image($data);
-        //     if ($ret_id != -1)
-        //         $response['status'] = 'ok';
-        //     else
-        //         $response = array('status' => 'DB Error', 'code' => 400);
-        // }
-        // else
-        // {
-        //     //generate unique file name
-        //     $fileName = time().'_'.basename($_FILES["file"]["name"]);
-        
-        //     //file upload path
-        //     $targetFilePath = $this->targetDir . $fileName;
-
-        //     $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-        //     $allowTypes = array('jpg','png','jpeg','gif');
-
-        //     if(in_array($fileType, $allowTypes)){
-        //         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-        //             $data = array();
-        //             $data['drug_image_id']                = $form_data['drug_id'];
-        //             $data['drug_image']             = $form_data['drug_image'];
-        //             $data['drug_image_image_file']  = $fileName;
-
-        //             $drugimage_model = new DrugimageModel();
-        //             $ret_id = $drugimage_model->update_drug_image($data);
-        //             if ($ret_id != -1)
-        //                 $response['status'] = 'ok';
-        //             else
-        //                 $response = array('status' => 'DB Error', 'code' => 400);
-        //         }else{
-        //             $response = array('status' => 'Error', 'code' => 400);
-        //         }
-        //     }else{
-        //         $response = array('status' => 'Type Error', 'code' => 400);
-        //     }
-        // }
-
-        return $response;
     }
 }
 ?>
