@@ -94,19 +94,16 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <!-----------REPEAT ROW--------- -->
-
+                                <!-- <tr>
                                     <td>Repeat</td>
                                     <td>Repeat</td>
                                     <td>
                                         <p>
                                             <a class="waves-effect waves-grey btn-flat green-text"><i class="material-icons left">edit</i></a>
                                             <a class="waves-effect waves-grey btn-flat red-text"><i class="material-icons left">delete</i></a>
-                                            <!-----------------------Show Delete Warning Popup Before Deleting-------- -->
                                         </p>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>

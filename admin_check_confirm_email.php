@@ -1,5 +1,5 @@
 <?php 
-	include_once dirname(__FILE__). "server/controller/admin.php";
+	include_once "server/controller/admin.php";
 	$reg_admin=new ADMIN();
 	$return_code=array();
 	$return_code[ 'result']=null;
