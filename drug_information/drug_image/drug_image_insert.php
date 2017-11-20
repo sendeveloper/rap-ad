@@ -209,7 +209,7 @@
     <!-- Include Editor JS files.  -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.1/js/froala_editor.pkgd.min.js">
     </script>
-    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+    <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
     <!-- Initialize the editor.  -->
     <script src="../../../js/jquery.blockUI.js">
     </script> 
