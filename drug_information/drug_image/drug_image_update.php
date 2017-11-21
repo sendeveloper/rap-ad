@@ -267,7 +267,16 @@
                     $('#update_drug_image_desc').val(res['data']['drug_image_description']);
                     if (res['data']['image_count'] > 0)
                     {
-                      $('#current_image').attr('src', res['data']['file_name_1']);
+                        var imageContainer = $('#current_image').parent();
+                        for (var i=0;i<res['data']['image_count'];i++)
+                        {
+                          if (i == 0)
+                            $('#current_image').attr('src', res['data']['file_name_'+(i+1)]);
+                          else{
+                            imageContainer.append('<br/>');
+                            imageContainer.append($('<img/>').attr('src', res['data']['file_name_'+(i+1)]).css('height', '200px'));
+                          }
+                        }
                     }
                     $('#update_drug_image_desc').froalaEditor({
                         imageUploadURL: '/admin/images/uploads/'

@@ -92,8 +92,8 @@
                             ?>
                             <input type="hidden" id="code_id" name="code_id" value="<?php echo $id ?>" />
                             <div class="input-field">
-                                <input id="update_patient_first_name" name="update_patient_first_name" type="text" class="validate">
-                                <label for="update_patient_first_name" data-error="wrong" data-success="right">Patient First Name</label>
+                                <input disabled id="update_patient_first_name" name="update_patient_first_name" type="text" class="validate">
+                                <label for="update_patient_first_name" data-error="wrong" data-success="right"></label>
                             </div>
                             <br>
 
@@ -101,16 +101,16 @@
                                 <div class="col s12 m5">
 
                                     <div class="input-field">
-                                        <input id="update_date_of_birth" name="update_date_of_birth" type="text" class="datepicker">
-                                        <label for="update_date_of_birth" data-error="wrong" data-success="right">Date Of Birth</label>
+                                        <input disabled id="update_date_of_birth" name="update_date_of_birth" type="text" class="datepicker">
+                                        <label for="update_date_of_birth" data-error="wrong" data-success="right"></label>
                                     </div>
                                     <br>
                                     <br>
 
                                     <div class="input-field">
                                         <!------Use autocomplete from ndc field in drug_properties table------>
-                                        <input type="text" id="update_ndc1" name="update_ndc1" class="validate" autocomplete="off">
-                                        <label for="update_ndc1">Drug NDC Number</label>
+                                        <input disabled type="text" id="update_ndc1" name="update_ndc1" class="validate" autocomplete="off">
+                                        <label for="update_ndc1"></label>
                                     </div>
                                 </div>
                                 <div class="col s12 m1">
@@ -119,8 +119,8 @@
                                 <div class="col s12 m5">
 
                                     <div class="input-field">
-                                        <input id="update_patient_cellphone" type="tel" class="validate">
-                                        <label for="update_patient_cellphone" data-error="wrong" data-success="right">Cell Phone Number</label>
+                                        <input disabled id="update_patient_cellphone" type="tel" class="validate">
+                                        <label for="update_patient_cellphone" data-error="wrong" data-success="right"></label>
                                     </div>
                                     <br>
                                     <br>

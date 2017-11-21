@@ -40,6 +40,18 @@ class ADMIN
         else
             return NULL;
     }
+    public function get_user_level() {
+        if (isset($_SESSION['admin1234']))
+            return strtolower($_SESSION['admin1234']['user_level']);
+        else
+            return NULL;
+    }
+    public function is_top_level() {
+        if (isset($_SESSION['admin1234']) && strtolower($_SESSION['admin1234']['user_level']) == 'top')
+            return true;
+        else
+            return false;
+    }
     public function get_admin_full_info()
     {
         if (isset($_SESSION['admin1234'])) {

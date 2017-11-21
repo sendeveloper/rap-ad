@@ -56,6 +56,7 @@ class AdminModel{
   	   						$login_data['admin_id'] = $row['admin_user_id'];
   	   						$login_data['first_name'] = $row['admin_first_name'];
   	   						$login_data['email'] = $row['admin_email'];
+                  $login_data['user_level'] = $row['admin_user_level'];
   	   						$_SESSION['admin1234'] = $login_data;
   	   					}
   	   					else

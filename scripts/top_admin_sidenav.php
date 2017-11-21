@@ -8,17 +8,21 @@
     <!--Top links--------- -->
     <ul class="right hide-on-med-and-down">
         <?php        
-        if ((isset($admin_logged_in) && $admin_logged_in==FALSE) || !isset($admin_logged_in))
-        {
+        if (isset($admin) && $admin->is_top_level()){  
         ?>        
         <li>
-          <a href="admin_register.php" class="waves-effect waves-red btn-flat">
+          <a href="/admin/admin_register.php" class="waves-effect waves-red btn-flat">
             <span class="blue-text text-lighten-2 font12">Create Account
             </span>
           </a>
-        </li>        
+        </li>  
+        <?php
+        }
+        if ((isset($admin_logged_in) && $admin_logged_in==FALSE) || !isset($admin_logged_in))
+        {
+        ?>      
         <li>
-          <a href="admin_login.php" class="waves-effect waves-red btn-flat">
+          <a href="/admin/admin_login.php" class="waves-effect waves-red btn-flat">
             <span class="red-text text-lighten-2 font12">Login
             </span>
           </a>
@@ -96,16 +100,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="#">Interactive Code</a>
-                                <div>
-                                    <ul>
-                                        <li><a href="/admin/drug_information/interactive_code/interactive_code_insert.php">Insert Interactive Code</a>
-                                        </li>
-                                        <li><a href="/admin/drug_information/interactive_code/interactive_code_list.php">List Interactive Codes</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+                            
                             <li><a href="#">Patient Education</a>
                                 <div>
                                     <ul>
@@ -119,7 +114,32 @@
                         </ul>
                     </div>
                 </li>
-
+                <li><a href="#">Interactive Code</a>
+                                <div>
+                                    <ul>
+                                        <li><a href="/admin/drug_information/interactive_code/interactive_code_insert.php">Insert Interactive Code</a>
+                                        </li>
+                                        <li><a href="/admin/drug_information/interactive_code/interactive_code_list.php">List Interactive Codes</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                <?php   
+                    if (isset($admin) && $admin->is_top_level()){  
+                ?> 
+                <li><a href="#">Register Admin User</a>
+                                <div>
+                                    <ul>
+                                        <li><a href="/admin/admin_register.php">Register Admin User</a>
+                                        </li>
+                                        <li><a href="/admin/admin_users_list.php">List Admin Users</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                    <?php
+                    }
+                    ?>
                 <script type="text/javascript">
                     <!--
                     P7_TMMop('p7TMM_1', 1, 0, 0, 3, 1, 1, 0, 0, -1, 150);

@@ -261,7 +261,6 @@
         {
           var obj = $('.interactive_code_list tbody');
           var html = "";
-          console.log(data);
           for (var i=0;i<data.length;i++)
           {
             html += '<tr attr-id="' + data[i]['interactive_code_id'] + '"> \

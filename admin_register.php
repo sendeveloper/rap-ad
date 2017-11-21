@@ -3,10 +3,12 @@
   $admin = new ADMIN;
   $admin_logged_in = FALSE;
   if ( $admin->is_logged_in() ) 
-  { 
-    $admin_logged_in = TRUE;  
-    $admin->redirect();
+  {
+    if (!$admin->is_top_level())
+      $admin->redirect();
   }
+  else
+    $admin->redirect();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,117 +51,206 @@
     </header>  
     <!------------------------Container-------------------- -->
     <main>
+
       <div class="section">
+
         <div class="container">
+
           <div class="row center">       
+
             <div class="col s12 m3">
+
             </div>        
+
             <div class="col s12 m6 maxwidth600 center">         
-              <div class="card-panel z-depth-3 hoverable">            
+
+              <div>            
+
                 <img class="responsive-img" src="../../images/objects/smiley-plus.svg" width="100" height="auto" alt="Smiley face with add sign">
+
                 <br>            
+
                 <form id="register_form" method="post">             
+
                   <div class="row">               
+
                     <div class="input-field col s12 l6"> 
+
                       <i class="material-icons prefix">account_circle
+
                       </i> 
+
                       <input id="first_name" type="text" class="validate" name="first_name"> 
+
                       <label for="first_name" data-error="wrong" data-success="right">First Name
+
                       </label> 
+
                     </div>                
+
                     <div class="input-field col s12 l6"> 
+
                       <i class="material-icons prefix">account_circle
+
                       </i> 
+
                       <input id="last_name" type="text" class="validate" name="last_name"> 
+
                       <label for="last_name" data-error="wrong" data-success="right">Last Name
+
                       </label> 
+
                     </div>              
+
                   </div>              
+
                   <div class="row">               
+
                     <div class="input-field col s12 l6"> 
+
                       <i class="material-icons prefix">email
+
                       </i> 
+
                       <input id="email" type="email" class="validate" name="email"> 
+
                       <label for="email" data-error="wrong" data-success="right">Email
+
                       </label> 
+
                     </div>                
+
                     <div class="input-field col s12 l6"> 
+
                       <i class="material-icons prefix">email
+
                       </i> 
+
                       <input id="confirm_email" type="email" class="validate" name="confirm_email"> 
+
                       <label for="confirm_email" data-error="wrong" data-success="right">Confirm Email
+
                       </label> 
+
                     </div>              
+
                   </div>              
+
                   <div class="row">               
+
                     <div class="input-field col s12 l6"> 
+
                       <i class="material-icons prefix">lock
+
                       </i> 
+
                       <input id="password" type="password" class="validate" name="password"> 
+
                       <label for="password" data-error="wrong" data-success="right">Choose Password
+
                       </label> 
+
                     </div>
+
                     <div class="input-field col s12 l6"> 
+
                       <i class="material-icons prefix hide-on-small-and-down" style="left: 5px;">accessibility</i>
+
                       <select class="icons" class="validate" name="user_level" id="user_level">
+
                           <option value="" disabled selected><span class="blue">Please Choose</span></option>
+
                           <option value="Top">Top</option>
+
                           <option value="Pharmacist">Pharmacist</option>
+
                           <option value="Student">Student</option>
+
                           <option value="Employee">Employee</option>
+
                       </select>
+
                       <label for="user_level" data-error="wrong" data-success="right">User level:</label>
+
                     </div>     
+
                   </div>              
+           
+
                   <div class="row">               
-                    <div class="input-field col s12">                 
-                      <p> 
-                        <input type="checkbox" id="agree_to_policy" name="agree"> 
-                        <label for="agree_to_policy">
-                          <span class="red-text">I agree to the Terms of use/privacy policy of Red Apple Interactive Pharmacy
-                          </span>
-                        </label> 
-                      </p>                
-                    </div>              
-                  </div>              
-                  <div class="row">               
+
                     <p>&nbsp;
+
                     </p>                
+
+
                     <p class="center-align"> 
+
                       <button class="btn waves-effect waves-light red" type="submit" name="action">Submit                                        
+
                         <i class="material-icons right">send
+
                         </i>                                        
+
                       </button>
+
                       <br> 
+
                       <br> 
-                      <a href="admin_login.php" class="waves-effect waves-light btn-flat amber-text text-accent-3">Registered already
-                      </a> 
+
+
                     </p>              
+
                   </div>            
+
                 </form>         
+
               </div>        
+
             </div>        
+
             <div class="col s12 m3">&nbsp;
+
             </div>      
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+      <div class="section grey lighten-4">
+
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col s12 m6">
+
+              <!--Text -->    
+
+            </div>
+
+            <div class="col s12 m3">
+
+              <!--Text -->
+
+            </div>
+
+            <div class="col s12 m3">
+
+              <!--Text -->
+
+            </div>
+
           </div>
 
         </div>
-      </div>
-      <div class="section grey lighten-4">
-        <div class="container">
-          <div class="row">
-            <div class="col s12 m6">
-              <!--Text -->    
-            </div>
-            <div class="col s12 m3">
-              <!--Text -->
-            </div>
-            <div class="col s12 m3">
-              <!--Text -->
-            </div>
-          </div>
-        </div>
+
       </div> 
+
     </main> 
     <!--  Scripts -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js">
