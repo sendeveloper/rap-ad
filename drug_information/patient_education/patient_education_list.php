@@ -87,8 +87,8 @@
                         <div class="center-align maxwidth400">
                             <div class="input-field">
                                 <i class="material-icons prefix">search</i>
-                                <input type="text" id="ndc-input" name="ndc-input" class="" autocomplete="off">
-                                <label for="ndc-input">Search</label>
+                                <input type="text" id="name-input" name="name-input" class="" autocomplete="off">
+                                <label for="name-input">Search</label>
 
 
                                 <!--------Show search results in details page---------- -->
@@ -101,7 +101,6 @@
                         <table class="highlight responsive-table bordered centered drug_education_list">
                             <thead>
                                 <tr>
-                                    <th>Drug NDC</th>
                                     <th>Generic Name</th>
                                     <th>Brand Name</th>
                                     <th>Used For</th>
@@ -111,7 +110,6 @@
 
                             <tbody>
                                 <!-- <tr>
-                                    <td>Repeat</td>
                                     <td>Repeat</td>
                                     <td>Repeat</td>
                                     <td>Repeat</td>
@@ -161,7 +159,7 @@
     <div id="deleteEducationModal" class="modal">
       <div class="modal-content">
           <h4 style="color: red;">Do you really want to delete this drug property?</h4>
-          <p>NDC: <b id="dlg_drug_ndc"></b></p>
+          <p>Generic Name: <b id="dlg_drug_generic"></b></p>
           <p>Brand name: <b id="dlg_drug_brand"></b></p>
       </div>
       <div class="modal-footer">
@@ -184,7 +182,7 @@
     <script src="../../../js/admin_main.js"></script>
     <script>
       $(document).ready(function() {
-        var ndc_auto_data = {};
+        var name_auto_data = {};
         var server_url = "../../server/admin_interface.php";
         load_data();
         function load_data() {
@@ -202,9 +200,9 @@
               $.unblockUI();
               if (res['code'] == '200'){
                 for (var i=0; i<res['ndc_data'].length; i++) {
-                    ndc_auto_data[ res['ndc_data'][i]['ndc'] ] = null;
+                    name_auto_data[ res['ndc_data'][i]['generic_name'] ] = null;
                 }
-                autoNdcInit();
+                autoNameInit();
                 load_list_data('');
               }
               else
@@ -219,9 +217,9 @@
             }
           })
         }
-        function autoNdcInit(){
-          $('#ndc-input').autocomplete({
-            data: ndc_auto_data,
+        function autoNameInit(){
+          $('#name-input').autocomplete({
+            data: name_auto_data,
             onAutocomplete: function(txt) {
                 $('.autocomplete-content').html("");
                 load_list_data(txt);
@@ -229,7 +227,7 @@
             limit: 20
           })
         }
-        $('#ndc-input').keyup(function(e) {
+        $('#name-input').keyup(function(e) {
             var code = e.which;
             if(code==13)e.preventDefault();
             if(code==32||code==13||code==188||code==186){
@@ -268,14 +266,12 @@
         {
           var obj = $('.drug_education_list tbody');
           var html = "";
-          console.log(data);
           for (var i=0;i<data.length;i++)
           {
             var used_for, drug_class;
             used_for = data[i]['used_for'].length > 15 ? data[i]['used_for'].substring(0,15) + '...' : data[i]['used_for'];
             drug_class = data[i]['drug_class'].length > 15 ? data[i]['drug_class'].substring(0,15) + '...' : data[i]['drug_class'];
             html += '<tr attr-id="' + data[i]['patient_drug_information_id'] + '"> \
-                <td>' + data[i]['ndc'] + '</td> \
                 <td>' + data[i]['generic_name'] + '</td> \
                 <td>' + data[i]['brand_name'] + '</td> \
                 <td>' + used_for + '</td> \

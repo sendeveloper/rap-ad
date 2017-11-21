@@ -88,14 +88,10 @@
                         <p>(For accurate drug image link, pull NDC from Drug_Properties database using autocomplete. Insert generic_name and brand_name in Generic Name and Brand Name field below from autocomplete)</p>
                         <hr class="style11">
                         <form id="drug_education_insert_form" method="POST">
-                            <div class="input-field">
-                                <input type="text" id="ndc-input" name="ndc-input" class="validate" autocomplete="off">
-                                <label for="ndc-input">NDC</label>
-                            </div>
 
                             <div class="input-field">
-                                <input id="generic_name" name="generic_name" type="text" class="validate">
-                                <label for="generic_name" data-error="wrong" data-success="right">Generic Name</label>
+                                <input id="generic_name" name="generic_name" type="text" class="validate" autocomplete="off">
+                                <label for="generic_name">Generic Name</label>
                             </div>
                             <div class="input-field">
                                 <input id="brand_name" name="brand_name" type="text" class="validate">
@@ -271,8 +267,8 @@
     </script>
     <script>
         $(function() {
-            var ndc_auto_data = {};
-            var ndc_entire_data = {};
+            var name_auto_data = {};
+            var name_entire_data = {};
             var server_url = "../../server/admin_interface.php";
             load_data();
             $('.froalaTextarea').froalaEditor({
@@ -293,10 +289,10 @@
                   $.unblockUI();
                   if (res['code'] == '200'){
                     for (var i=0; i<res['ndc_data'].length; i++) {
-                        ndc_auto_data[ res['ndc_data'][i]['ndc'] ] = null;
-                        ndc_entire_data[ res['ndc_data'][i]['ndc'] ] = {'generic': res['ndc_data'][i]['generic_name'], 'brand': res['ndc_data'][i]['brand_name']};
+                        name_auto_data[ res['ndc_data'][i]['generic_name'] ] = null;
+                        name_entire_data[ res['ndc_data'][i]['generic_name'] ] = {'brand': res['ndc_data'][i]['brand_name']};
                     }
-                    autoNdcInit();
+                    autoNameInit();
                   }
                   else
                   {
@@ -310,16 +306,14 @@
                 }
               })
             }
-            function autoNdcInit(){
-              $('#ndc-input').autocomplete({
-                data: ndc_auto_data,
+            function autoNameInit(){
+              $('#generic_name').autocomplete({
+                data: name_auto_data,
                 onAutocomplete: function(txt) {
-                  if (ndc_entire_data[txt] != undefined){
-                    $('#generic_name').val(ndc_entire_data[txt]['generic']).focus();
-                    $('#brand_name').val(ndc_entire_data[txt]['brand']).focus();
+                  if (name_entire_data[txt] != undefined){
+                    $('#brand_name').val(name_entire_data[txt]['brand']).focus();
                   }
                   else{
-                    $('#generic_name').val("").focus();
                     $('#brand_name').val("").focus();
                   }
                 },

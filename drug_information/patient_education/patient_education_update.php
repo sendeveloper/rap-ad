@@ -97,14 +97,10 @@
                                 $id = (int)$id;
                             ?>
                             <input type="hidden" id="drug_id" name="drug_id" value="<?php echo $id ?>" />
-                            <div class="input-field">
-                                <input type="text" id="update_ndc" name="update_ndc" class="validate" autocomplete="off">
-                                <label for="update_ndc">NDC</label>
-                            </div>
 
                             <div class="input-field">
-                                <input id="update_generic_name" name="update_generic_name" type="text" class="validate">
-                                <label for="update_generic_name" data-error="wrong" data-success="right">Generic Name</label>
+                                <input id="update_generic_name" name="update_generic_name" type="text" class="validate" autocomplete="off">
+                                <label for="update_generic_name">Generic Name</label>
                             </div>
                             <div class="input-field">
                                 <input id="update_brand_name" name="update_brand_name" type="text" class="validate">
@@ -276,8 +272,8 @@
     <!-- Initialize the editor.  -->
     <script>
         $(function() {
-            var ndc_auto_data = {};
-            var ndc_entire_data = {};
+            var name_auto_data = {};
+            var name_entire_data = {};
             var server_url = "../../server/admin_interface.php";
             load_data();
             function load_data() {
@@ -296,8 +292,8 @@
                   $.unblockUI();
                   if (res['code'] == '200'){
                     for (var i=0; i<res['ndc_data'].length; i++) {
-                        ndc_auto_data[ res['ndc_data'][i]['ndc'] ] = null;
-                        ndc_entire_data[ res['ndc_data'][i]['ndc'] ] = {'generic': res['ndc_data'][i]['generic_name'], 'brand': res['ndc_data'][i]['brand_name']};
+                        name_auto_data[ res['ndc_data'][i]['generic_name'] ] = null;
+                        name_entire_data[ res['ndc_data'][i]['generic_name'] ] = {'brand': res['ndc_data'][i]['brand_name']};
                     }
                     $.each(res['data'], function(key, value) {
                       $('#update_' + key).val(value);  
@@ -305,10 +301,9 @@
                     $('.froalaTextarea').froalaEditor({
                         imageUploadURL: '/admin/images/uploads/'
                     })
-                    $('#update_generic_name').focus();
                     $('#update_brand_name').focus();
-                    $('#update_ndc').focus();
-                    autoNdcInit();
+                    $('#update_generic_name').focus();
+                    autoNameInit();
                   }
                   else
                   {
@@ -322,16 +317,14 @@
                 }
               })
             }
-            function autoNdcInit(){
-              $('#update_ndc').autocomplete({
-                data: ndc_auto_data,
+            function autoNameInit(){
+              $('#update_generic_name').autocomplete({
+                data: name_auto_data,
                 onAutocomplete: function(txt) {
-                  if (ndc_entire_data[txt] != undefined){
-                    $('#update_generic_name').val(ndc_entire_data[txt]['generic']).focus();
-                    $('#update_brand_name').val(ndc_entire_data[txt]['brand']).focus();
+                  if (name_entire_data[txt] != undefined){
+                    $('#update_brand_name').val(name_entire_data[txt]['brand']).focus();
                   }
                   else{
-                    $('#update_generic_name').val("").focus();
                     $('#update_brand_name').val("").focus();
                   }
                 },

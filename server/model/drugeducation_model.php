@@ -34,14 +34,14 @@ class DrugeducationModel{
   }
   public function get_drug_simple_list() {
     global $mysqli;
-    $sql = "SELECT ndc, generic_name FROM {$this->table_name} ORDER BY ndc";
+    $sql = "SELECT generic_name FROM {$this->table_name} ORDER BY generic_name";
     $ret = array();
     if ($result = $mysqli->query($sql)) {
       if ($result->num_rows>0)
       {
         while($row = $result->fetch_assoc())
         {
-          $temp = array('ndc' => $row['ndc'], 'generic_name' => $row['generic_name']);
+          $temp = array('generic_name' => $row['generic_name']);
           $ret[] = $temp;
         }
       }
@@ -54,9 +54,9 @@ class DrugeducationModel{
     $ret = array();
     $sql = "SELECT * FROM {$this->table_name}";
     if ($filter != ""){
-      $sql .= " WHERE `ndc` LIKE '%{$filter}%'";
+      $sql .= " WHERE `generic_name` LIKE '%{$filter}%'";
     }
-    $sql .= " ORDER BY ndc DESC";
+    $sql .= " ORDER BY generic_name DESC";
     if ($result = $mysqli->query($sql)) {
       if ($result->num_rows>0)
       {

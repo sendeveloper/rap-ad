@@ -102,11 +102,6 @@
                     ?>
                     <div class="col s12 m6">
                         <input type="hidden" id="drug_id" value="<?php echo $id ?>" />
-                        <div class="card-panel">
-                            <h4>Drug NDC:</h4>
-                            <hr class="style1">
-                            <p id="ndc"></p>
-                        </div>
                         <div class="card-panel yellow">
                             <h4>Generic Name:</h4>
                             <hr class="style1">
@@ -240,7 +235,7 @@
     <div id="deleteEducationDetailModal" class="modal">
       <div class="modal-content">
           <h4 style="color: red;">Do you really want to delete this drug property?</h4>
-          <p>NDC: <b id="dlg_drug_ndc"></b></p>
+          <p>Generic name: <b id="dlg_drug_generic"></b></p>
           <p>Brand name: <b id="dlg_drug_brand"></b></p>
       </div>
       <div class="modal-footer">
@@ -278,7 +273,7 @@
             {
               $.unblockUI();
               if (res['code'] == '200'){
-                if (res['data']['ndc'] == undefined)
+                if (res['data']['patient_drug_information_id'] == undefined)
                 {
                   var msg = '<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-id-1" class="ui-dialog-title">' + 'The data is not existed' + '</span><button id="btnCloseBlockUI" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">close</span></button></div>';
                   $('button[type="submit"]').remove();
@@ -327,7 +322,7 @@
               $.unblockUI();
               if (res['code'] == '200'){
                 $('#deleteEducationDetailModal').attr('attr-id', id);
-                $('#deleteEducationDetailModal #dlg_drug_ndc').html(res['data']['ndc']);
+                $('#deleteEducationDetailModal #dlg_drug_generic').html(res['data']['generic_name']);
                 $('#deleteEducationDetailModal #dlg_drug_brand').html(res['data']['brand_name']);
                 $('#deleteEducationDetailModal').modal('open');
               }
