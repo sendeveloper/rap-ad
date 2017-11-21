@@ -215,9 +215,6 @@
             var ndc_auto_data = {};
             var server_url = "../../server/admin_interface.php";
             load_data();
-            $('#drug_image_desc').froalaEditor({
-                imageUploadURL: '/admin/images/uploads/'
-            });
             function load_data() {
               var data = {'flag': 'interactive_code_insert_auto'};
               $.ajax({

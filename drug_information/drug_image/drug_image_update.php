@@ -264,7 +264,7 @@
                     $('#drug_shape').html(shape_html);
                     $('#drug_shape').material_select();
 
-                    $('#update_drug_image_desc').val(res['data']['drug_image_description']);
+                    // $('#update_drug_image_desc').val(res['data']['drug_image_description']);
                     if (res['data']['image_count'] > 0)
                     {
                         var imageContainer = $('#current_image').parent();
@@ -279,8 +279,10 @@
                         }
                     }
                     $('#update_drug_image_desc').froalaEditor({
-                        imageUploadURL: '/admin/images/uploads/'
+                        key: 'BsggeuvkmybjC-16e1oliH1qA-32y==',
+                        imageUploadURL: '/admin/server/upload_froala_image.php'
                     })
+                    $('#update_drug_image_desc').froalaEditor('html.set', res['data']['drug_image_description']);
 
                     $('#update_generic_name').val(res['data']['generic_name']).focus();
                     $('#update_drug_imprint_side_1').val(res['data']['drug_imprint_side_1']).focus();

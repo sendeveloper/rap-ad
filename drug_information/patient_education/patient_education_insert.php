@@ -272,7 +272,8 @@
             var server_url = "../../server/admin_interface.php";
             load_data();
             $('.froalaTextarea').froalaEditor({
-                imageUploadURL: '/admin/images/uploads/'
+                key: 'BsggeuvkmybjC-16e1oliH1qA-32y==',
+                imageUploadURL: '/admin/server/upload_froala_image.php'
             });
             function load_data() {
               var data = {'flag': 'drug_education_insert_auto'};

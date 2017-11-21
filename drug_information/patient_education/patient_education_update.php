@@ -295,11 +295,16 @@
                         name_auto_data[ res['ndc_data'][i]['generic_name'] ] = null;
                         name_entire_data[ res['ndc_data'][i]['generic_name'] ] = {'brand': res['ndc_data'][i]['brand_name']};
                     }
-                    $.each(res['data'], function(key, value) {
-                      $('#update_' + key).val(value);  
-                    })
                     $('.froalaTextarea').froalaEditor({
-                        imageUploadURL: '/admin/images/uploads/'
+                        key: 'BsggeuvkmybjC-16e1oliH1qA-32y==',
+                        imageUploadURL: '/admin/server/upload_froala_image.php'
+                    })
+                    $.each(res['data'], function(key, value) {
+                        $('#update_' + key).val(value);
+                        if ($('#update_' + key).hasClass('froalaTextarea'))
+                        {
+                            $('#update_' + key).froalaEditor('html.set', value);
+                        }
                     })
                     $('#update_brand_name').focus();
                     $('#update_generic_name').focus();
