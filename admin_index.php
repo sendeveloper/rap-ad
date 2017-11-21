@@ -6,6 +6,8 @@
   { 
     $admin_logged_in = TRUE;  
   }
+  else
+    $admin->redirect();
 ?>
 <!DOCTYPE html>
 <html lang="en">
