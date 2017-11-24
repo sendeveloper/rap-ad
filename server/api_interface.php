@@ -30,7 +30,7 @@ if (isset($_REQUEST)) {
 		    break;
         case 'get_drug_property':
         	$ndc = $_REQUEST['ndc'];
-			$sql = "SELECT drug_properties.*, patient_interactivity_code.prescription_ready FROM patient_interactivity_code LEFT JOIN drug_properties ON patient_interactivity_code.ndc1=drug_properties.ndc WHERE patient_interactivity_code.ndc1='$ndc'";
+			$sql = "SELECT Drug_Properties.*, patient_interactivity_code.prescription_ready FROM patient_interactivity_code LEFT JOIN Drug_Properties ON patient_interactivity_code.ndc1=Drug_Properties.ndc WHERE patient_interactivity_code.ndc1='$ndc'";
 		    $data = array();
 		    if ($result = $mysqli->query($sql)) {
 				if ($result->num_rows>0)
@@ -51,7 +51,7 @@ if (isset($_REQUEST)) {
 		    break;
         case 'drug_information':
         	$ndc = $_REQUEST['ndc'];
-			$sql = "SELECT patient_drug_information.* FROM patient_drug_information LEFT JOIN drug_properties ON patient_drug_information.brand_name=drug_properties.brand_name  WHERE drug_properties.ndc='$ndc'";
+			$sql = "SELECT patient_drug_information.* FROM patient_drug_information LEFT JOIN Drug_Properties ON patient_drug_information.brand_name=Drug_Properties.brand_name  WHERE Drug_Properties.ndc='$ndc'";
 		    $data = array();
 		    if ($result = $mysqli->query($sql)) {
 				if ($result->num_rows>0)
