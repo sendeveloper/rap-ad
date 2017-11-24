@@ -94,7 +94,6 @@ if (isset($_REQUEST)) {
         default:
         	$ret = array('status_code' => 400, 'data' => []);
         	break;
-            # code...            break;    
     }
     echo json_encode($ret);
 }
