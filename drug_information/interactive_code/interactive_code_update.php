@@ -126,11 +126,10 @@
                                     <br>
 
                                     <div class="switch">
-                                        <label><span class="font24 orange-text">Prescription Ready? </span>
-                                            <br> NO
-                                            <input type="checkbox" name="update_ready" id="update_ready">
-                                            <span class="lever"></span> YES
-                                        </label>
+                                        <select class="icons" id="update_ready" name="update_ready">
+                                            <option value="" disabled selected><span class="red">Choose Status</span></option>
+                                        </select>
+                                        <label>Prescription Status</label>
                                     </div>
                                 </div>
                             </div>
@@ -224,11 +223,18 @@
                 }
                 else
                 {
-                   for (var i=0; i<res['ndc_data'].length; i++) {
+                  var options = ["In Progress", "On Order", "Ready"], option_html = "";
+                  for (var i=0; i<res['ndc_data'].length; i++) {
                       ndc_auto_data[ res['ndc_data'][i]['ndc'] ] = null;
                   }
-                  if (res['data']['prescription_ready'].toLowerCase() == 'yes')
-                    $('#update_ready').prop('checked', 'checked');
+                  option_html = '<option value="" disabled selected><span class="red">Choose Status</span></option>';
+                  for (i=0;i<3;i++)
+                  {
+                    var op = (res['data']['prescription_ready'].toLowerCase() == options[i].toLowerCase()) ? 'selected="selected"' : '';
+                    option_html += '<option value="' + options[i] + '" data-icon="" ' + op + '>' + options[i] + '</option>';
+                  }
+                  $('#update_ready').html(option_html);
+                  $('#update_ready').material_select();
                   $.each(res['data'], function(key, value) {
                     $('#update_' + key).val(value).focus();
                   })

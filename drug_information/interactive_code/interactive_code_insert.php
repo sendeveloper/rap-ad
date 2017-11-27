@@ -125,9 +125,9 @@
                                     <br>
                                     <br>
 
-                                    <div class="switch">
+                                    <div class="input-field">
                                         <select class="icons" id="prescription_ready" name="prescription_ready">
-                                            <option value="" disabled selected><span class="red">Select Status</span></option>
+                                            <option value="" disabled selected><span class="red">Choose Status</span></option>
                                             <option>In Progress</option>
                                             <option>On Order</option>
                                             <option>Ready</option>
