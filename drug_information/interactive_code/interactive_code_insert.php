@@ -126,11 +126,13 @@
                                     <br>
 
                                     <div class="switch">
-                                        <label><span class="font24 orange-text">Prescription Ready? </span>
-                                            <br> NO
-                                            <input type="checkbox" id="prescription_ready" name="prescription_ready">
-                                            <span class="lever"></span> YES
-                                        </label>
+                                        <select class="icons" id="prescription_ready" name="prescription_ready">
+                                            <option value="" disabled selected><span class="red">Select Status</span></option>
+                                            <option>In Progress</option>
+                                            <option>On Order</option>
+                                            <option>Ready</option>
+                                        </select>
+                                        <label>Prescription Status</label>
                                     </div>
                                 </div>
                             </div>

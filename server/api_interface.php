@@ -71,6 +71,7 @@ if (isset($_REQUEST)) {
 		    	$ret = array('status_code' => 400, 'count' => 0, 'data' => []);
 		    break;
         case 'drug_image':
+        	$abs_url = SITEURL . "/images/uploads/drug_image_image/";
         	$ndc = $_REQUEST['ndc'];
 			$sql = "SELECT * FROM drug_image WHERE drug_image.ndc='$ndc'";
 		    $data = array();
@@ -81,6 +82,15 @@ if (isset($_REQUEST)) {
 					$ret['count'] = $result->num_rows;
 					while($row = $result->fetch_assoc())
 					{
+						$row['images'] = [];
+						for($i=1;$i<8;$i++)
+						{
+							if ($row["file_name_{$i}"] != NULL)
+							{
+								array_push($row['images'], $abs_url . $row["file_name_{$i}"]);
+								unset($row["file_name_{$i}"]);
+							}
+						}
 						$data[] = $row;
 					}
 					$ret['data'] = $data;
