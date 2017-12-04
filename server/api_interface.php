@@ -2,6 +2,23 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Max-Age: 86400');    // cache for 1 day
+}
+
+// Access-Control headers are received during OPTIONS requests
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");         
+
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+        header("Access-Control-Allow-Headers:        {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+    exit(0);
+}
+
 require_once("config.php");
 if (isset($_REQUEST)) {
 	$ret = array();
@@ -93,6 +110,57 @@ if (isset($_REQUEST)) {
 						}
 						$data[] = $row;
 					}
+					$ret['data'] = $data;
+				}
+				else
+					$ret = array('status_code' => 200, 'count' => 0, 'data' => []);
+		    }
+		    else
+		    	$ret = array('status_code' => 400, 'count' => 0, 'data' => []);
+		    break;
+		case 'quiz_get':
+        	$ndc = $_REQUEST['ndc'];
+			$sql = "SELECT quiz_name.* FROM quiz_name LEFT JOIN Drug_Properties ON quiz_name.generic_name=Drug_Properties.generic_name  WHERE Drug_Properties.ndc='$ndc'";
+		    $data = array();
+		    if ($result = $mysqli->query($sql)) {
+				if ($result->num_rows>0)
+				{
+					$quiz_id = -1;
+					$quiz_name = "";
+					$ret['status_code'] = 200;
+					while($row = $result->fetch_assoc())
+					{
+						$quiz_id = $row['quiz_id'];
+						$quiz_name = $row['quiz_name'];
+						break;
+					}
+					$data['name'] = $quiz_name;
+					$sql_questions = "SELECT * from quiz_questions WHERE quiz_id='{$quiz_id}'";
+					$sql_options = "SELECT * from quiz_options WHERE quiz_id='{$quiz_id}'";
+					$data_q = array();
+					$data_o = array();
+					if($result1 = $mysqli->query($sql_questions))
+					{
+						if ($result1->num_rows > 0)
+						{
+							while($row1 = $result1->fetch_assoc())
+							{
+								$data_q[] = $row1;
+							}
+						}
+					}
+					if($result2 = $mysqli->query($sql_options))
+					{
+						if ($result2->num_rows > 0)
+						{
+							while($row2 = $result2->fetch_assoc())
+							{
+								$data_o[] = $row2;
+							}
+						}
+					}
+					$data['questions'] = $data_q;
+					$data['options'] = $data_o;
 					$ret['data'] = $data;
 				}
 				else
