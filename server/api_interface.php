@@ -169,6 +169,21 @@ if (isset($_REQUEST)) {
 		    else
 		    	$ret = array('status_code' => 400, 'count' => 0, 'data' => []);
 		    break;
+		case 'quiz_save':
+        	$ndc = $_REQUEST['ndc'];
+        	$sql = "";
+		    $data = array();
+		    if ($result = $mysqli->query($sql)) {
+				if ($result->num_rows>0)
+				{
+					
+				}
+				else
+					$ret = array('status_code' => 200, 'count' => 0, 'data' => []);
+		    }
+		    else
+		    	$ret = array('status_code' => 400, 'count' => 0, 'data' => []);
+        	break;
         default:
         	$ret = array('status_code' => 400, 'data' => []);
         	break;
